@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.mvc.dao.BoardDao">
+    
+    <select id="getSeq" parameterType="int">
+        select next value for board_seq
+    </select>
+
+    <insert id="insertBoard" parameterType="Board">
+        insert into board
+        (board_no, board_title, user_no, board_contents, board_filename, board_likes, create_date)
+        values
+        (#{no}, #{title}, #{writer.no}, #{contents}, #{filename}, 0, #{createDate})
+    </insert>
+    
+    <select id="getBoards" resultType="Board">
+        select
+        	board_no as no,
+        	board_title as title, 
+        	user_no as "user.no",
+        	board_contents as contents,
+        	board_filename as filename,
+        	board_likes as likes,
+        	create_date as createDate
+        from
+        	boards
+        order by
+        	board_no desc
+    </select>
+    
+    <select id="getBoards" resultType="Board">
+        select
+        	board_no as no,
+        	board_title as title, 
+        	user_no as "user.no",
+        	board_contents as contents,
+        	board_filename as filename,
+        	board_likes as likes,
+        	create_date as createDate
+        from
+        	boards
+        order by
+        	board_no desc
+    </select>
+    
+    <select id="getBoards" parameterType="int" resultType="Board">
+        select
+        	board_no as no,
+        	board_title as title, 
+        	user_no as "user.no",
+        	board_contents as contents,
+        	board_filename as filename,
+        	board_likes as likes,
+        	create_date as createDate
+        from
+        	boards
+        where
+        	board_no = #{value}
+    </select>
+    
+    <update id="updateBoard" parameterType="Board">
+        update
+        	boards
+        set
+        	board_title = #{title},
+        	board_contents = #{contents},
+        	board_filename = #{filename},
+        	board_contents = #{contents},
+        	board_likes = #{likes}
+        where
+        	board_no = #{no}
+    </update>
+    
+    <insert id="insertLikes" parameterType="Likes">
+        insert into board_likes
+        (board_no, user_no, create_date)
+        values
+        (#{board.no}, #{user.no}, #{createDate})
+    </insert>
+    
+    <delete id="deleteLikes" parameterType="Likes">
+        delete from 
+        	board_likes
+        where
+        	board_no = #{board.no}
+        	and user_no = #{user.no}
+    </delete>
+</mapper>

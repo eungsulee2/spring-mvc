@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.mvc.dao.UserDao">
+    
+    <select id="getSeq" resultType="int">
+      	select next value for user_seq
+    </select>
+
+    <insert id="insertUser" parameterType="User">
+        insert into users
+        (user_no, user_name, user_id, user_password, user_email, user_used, user_point, create_date)
+        values
+        (#{no}, #{name}, #{id}, #{password}, #{email}, 'Y', 0, #{createDate})
+    </insert>
+    
+    <select id="getUserByNo" parameterType="int" resultType="User">
+        select
+        	user_no as no,
+        	user_name as name,
+        	user_id as id,
+        	user_password as password,
+        	user_email as email,
+        	user_point as point,
+        	create_date as createDate
+        from
+        	users
+        where
+        	user_no = #{value}
+    </select>
+    
+    <select id="getUserById" parameterType="string" resultType="User">
+        select
+        	user_no as no,
+        	user_name as name,
+        	user_id as id,
+        	user_password as password,
+        	user_email as email,
+        	user_point as point,
+        	create_date as createDate
+        from
+        	users
+        where
+        	user_id = #{value}
+    </select>
+    
+    <update id="updateUser" parameterType="User">
+        update 
+        	users
+        set
+        	user_name = #{name},
+        	user_id = #{id},
+        	user_password = #{password},
+        	user_email = #{email},
+        	user_point = #{point}
+        where
+        	user_no = #{no}
+    </update>
+</mapper>

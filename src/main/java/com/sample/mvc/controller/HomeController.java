@@ -1,4 +1,4 @@
-package com.sample.mvc;
+package com.sample.mvc.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
 		return "home";

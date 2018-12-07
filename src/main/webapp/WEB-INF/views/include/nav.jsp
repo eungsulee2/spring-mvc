@@ -7,14 +7,20 @@
     	</div>
     	<ul class="nav navbar-nav">
       		<li class="active"><a href="/home.do">홈</a></li>
-      		<li><a href="/notice/list">공지사항</a></li>
       		<li><a href="/board/list">게시판</a></li>
-      		<li><a href="/todo/list">일정</a></li>
+      		<li class="disabled"><a href="/todo/list">일정</a></li>
+      		<li class="disabled"><a href="/todo/list">공지사항</a></li>
     	</ul>
     	<ul class="nav navbar-nav navbar-right">
-      		<li><a href="/user/register">회원가입</a></li>
-      		<li><a href="/login/login">로그인</a></li>
-      		<li><a href="/login/logout">로그아웃</a></li>
+    	<c:choose>
+    		<c:when test="${empty LOGIN_INFO}">
+	      		<li><a href="/user/register">회원가입</a></li>
+	      		<li><a href="/login/login">로그인</a></li>
+    		</c:when>
+    		<c:otherwise>
+	      		<li><a href="/login/logout">로그아웃</a></li>
+    		</c:otherwise>
+    	</c:choose>
     	</ul>
   	</div>
 </nav>
